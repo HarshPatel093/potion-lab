@@ -269,3 +269,27 @@ class Catalyst(Reagent):
     def getQuality(self):
         return self.__quality
 
+if __name__ == "__main__":
+    # Create an alchemist and get the lab
+    alchemist = Alchemist()
+    lab = alchemist.getLaboratory()
+
+    # Create reagents
+    herb = Herb("Avantoe", 5)
+    catalyst = Catalyst("Eye of Newt", 4, 1.5)
+
+    # Add reagents to the lab
+    alchemist.collectReagent(herb)
+    alchemist.collectReagent(catalyst)
+
+    # Refine the herb and catalyst
+    alchemist.refineReagents()
+
+    # Create a super potion manually
+    lab.mixPotion("Super Attack", "Super", "attack", herb, catalyst)
+
+    # Drink the potion
+    potion = lab._Laboratory__potions[0]
+    stat_affected = alchemist.drinkPotion(potion)
+    print(f"Drank {potion.getName()} → {stat_affected} boosted by {potion.getBoost()}")
+
